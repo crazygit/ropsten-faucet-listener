@@ -1,0 +1,20 @@
+version: "3.9"
+
+services:
+  ropsten-faucet-listener:
+    image: crazygit/ropsten-faucet-listener
+    restart: unless-stopped
+    environment:
+      FAUCET_CHANNEL_WEBHOOK_URL: ${FAUCET_CHANNEL_WEBHOOK_URL}
+      ETHERSCAN_API_KEY: ${ETHERSCAN_API_KEY}
+      ROPSTEN_HTTPS_ENDPOINT: ${ROPSTEN_HTTPS_ENDPOINT}
+      ROPSTEN_WEBSOCKET_ENDPOINT: ${ROPSTEN_WEBSOCKET_ENDPOINT}
+      ROPSTEN_FAUCET_CONTRACT_ADDRESS: ${ROPSTEN_FAUCET_CONTRACT_ADDRESS}
+      MINER_ADDRESS: ${MINER_ADDRESS}
+    build:
+      context: .
+    logging:
+      options:
+        max-size: '50m'
+        max-file: '3'
+      driver: json-file
